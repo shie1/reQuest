@@ -124,16 +124,21 @@
     </div>
     <div class="topleft">
         <a href="/about">About</a>
-        <a onclick="$.get('/open-path/?downloads')">Downloads</a>
+        <a onclick="opdl()">Downloads</a>
     </div>
 </body>
 
 <script>
+    i = 0
     function convert(url,res){
         if(!res){res=""}
         req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res))
         $.get(req)
         return true
+    }
+    function opdl(){
+        i++
+        $.get('/open-path/?downloads%2F&' + i.toString())
     }
 </script>
 
