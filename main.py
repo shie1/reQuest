@@ -89,4 +89,5 @@ if __name__ == '__main__':
         sys.exit()
     except KeyboardInterrupt:
         clear()
-        sys.exit()
+        while True:
+            sys.exit()
