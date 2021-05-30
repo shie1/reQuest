@@ -38,6 +38,8 @@
     }
     h1{
         font-size: 200px;
+        display: flex;
+        flex-direction: row;
     }
     p{
         font-size: 45px;
@@ -88,7 +90,6 @@
         display: flex;
         justify-content: center;
         width: 45vw;
-        font-size: 15px;
     }
     ul{
         transform: translateY(10px);
@@ -130,6 +131,11 @@
     input[type=text]{
         font-size: 20px;
     }
+    .wiggle {
+        animation-timing-function: ease-in-out;
+        animation-fill-mode: both;
+        animation: wiggle 20s infinite;
+    }
 </style>
     
 <head>
@@ -166,7 +172,7 @@
     <div class="overlay">
         <div class="welcome">
             <p class="top">Welcome to</p>
-            <h1>re:Quest</h1>
+            <h1>re:<div class="wiggle">Q</div>uest</h1>
             <p class="by">by: Shie1bi</p>
         </div>
         <div class="form__group field" style="display: flex;justify-content: center;margin-top: -20px;">
