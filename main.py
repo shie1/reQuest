@@ -1,7 +1,10 @@
-import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform, requests, base64
+import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform, slugi, pystray
 from threading import Thread
 from time import sleep
-from pyngrok import ngrok
+from pyngrok.ngrok import connect as cn
+from PIL import Image
+
+iconfile = Image.open("icon.png")
 
 if(len(sys.argv) > 1):
     try:
@@ -11,10 +14,11 @@ if(len(sys.argv) > 1):
 else:
     port = 4658
 
+slugi.init(cn(port))
+
 os.chdir('web')
 
 if(platform.system() == "Windows"):
-    def openPath(path):
         os.system("explorer.exe " + path)
 elif(platform.system() == "Linux"):
     def openPath(path):
@@ -52,35 +56,22 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     pass
 
-def slugify(value, allow_unicode=False):
-    """
-    Taken from https://github.com/django/django/blob/master/django/utils/text.py
-    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
-    dashes to single dashes. Remove characters that aren't alphanumerics,
-    underscores, or hyphens. Convert to lowercase. Also strip leading and
-    trailing whitespace, dashes, and underscores.
-    """
-    value = str(value)
-    if allow_unicode:
-        value = unicodedata.normalize('NFKC', value)
-    else:
-        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
-    value = re.sub(r'[^\w\s-]', '', value.lower())
-    return re.sub(r'[-\s]+', '-', value).strip('-_')
-
 def convert(url,resolution):
     yt = pytube.YouTube(url)
     stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
     if(stream == None):
         stream = yt.streams.get_highest_resolution()
-    fileName = slugify(yt.title)
+    fileName = slugi.slugify(yt.title)
     if(os.path.exists("downloads/" + fileName)):
         return "File already exists!"
     stream.download("downloads",filename=fileName)
     return "File downloaded!"
 
 if __name__ == '__main__':
-    server = ThreadedHTTPServer(('localhost', port), Handler)
-    ngrok.connect(port)
-    print('Starting server, use <Ctrl-C> to stop')
-    server.serve_forever()
+    try:
+        server = ThreadedHTTPServer(('localhost', port), Handler)
+        print('Starting server, use <Ctrl-C> to stop')
+        webbrowser.open("localhost:" + str(port))
+        server.serve_forever()
+    except:
+        webbrowser.open("localhost:" + str(port))
