@@ -19,6 +19,7 @@
         user-select: none;
     }
     body {
+        overflow-x: scroll;
         touch-action: none;
     }
     .overlay *{
@@ -45,14 +46,14 @@
     p.top{
         margin-bottom: -70px;
     }
-    li{
+    a{
         font-size: 50px;
         transition: 100ms;
     }
-    li:hover{
+    a:hover{
         transform: rotate(5deg);
     }
-    li:active{
+    a:active{
         transition: 50ms;
         color: rgb(84, 200, 253);
     }
@@ -90,13 +91,20 @@
         width: 45vw;
         font-size: 15px;
     }
-    ul{
+    .list{
         transform: translateY(10px);
         display: flex;
+        flex-direction: row;
         justify-content: center;
-        width: 45vw;
+        height: 120%;
+    }
+    .list a {
+        padding: 0 10px;
     }
     .welcome{
+        display: flex;
+        align-items: center;
+        position: static;
         animation-timing-function: ease-in-out;
         animation-fill-mode: both;
         animation: wiggle 20s infinite;
@@ -136,11 +144,13 @@
     </div>
     <div class="overlay">
         <div class="welcome">
-            <img src="/favicon.png" style="width:300px;">
+            <img src="/favicon.png" style="width:250px;">
         </div>
-        <ul>
-            <li><a href="https://github.com/shie1/reQuest" target="_blank">GitHub</a></li>
-        </ul>
+        <p>-re:Quest-</p>
+        <div class="list">
+            <a href="https://github.com/shie1/reQuest" target="_blank">GitHub</a>
+            <a href="https://youtube.com/shie1bi" target="_blank">YouTube</a>
+        </div>
     </div>
     <a class="topleft" href="/">Back</a>
 </body>

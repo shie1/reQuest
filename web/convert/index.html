@@ -96,11 +96,6 @@
         justify-content: center;
         width: 45vw;
     }
-    .welcome{
-        animation-timing-function: ease-in-out;
-        animation-fill-mode: both;
-        animation: wiggle 20s infinite;
-    }
 </style>
     
 <head>
@@ -151,15 +146,13 @@
 </body>
 
 <script>
-    i = 0
     function convert(url,res){
         if(!res){res=""}
-        req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res))
+        req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res) + "&" + Date.now().toString())
         $.get(req)
     }
     function opdl(){
-        i++
-        document.location.href = '/open-path/?downloads%2F&' + i.toString()
+        document.location.href = '/open-path/?downloads%2F&' + Date.now().toString()
     }
 </script>
 
