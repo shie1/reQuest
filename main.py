@@ -75,7 +75,6 @@ def convert(url,resolution):
     global last
     def comp(a,b):
         global last
-        print(b, last)
         if(b == last):
             return
         last = b
