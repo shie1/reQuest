@@ -1,8 +1,13 @@
 import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform, slugi, pystray, getopt
+from pytube.cli import on_progress
 from threading import Thread
 from time import sleep
 from pyngrok.ngrok import connect as cn
 from PIL import Image
+from subprocess import Popen
+from pynotifier import Notification
+
+last = ""
 
 iconfile = Image.open("icon.png")
 
@@ -24,17 +29,17 @@ os.chdir('web')
 
 if(platform.system() == "Windows"):
     def openPath(path):
-        os.system("explorer.exe " + path)
+        Popen("explorer.exe " + path, shell=True,stdin=None, stdout=None, stderr=None, close_fds=True)
     def clear():
         os.system("cls")
 elif(platform.system() == "Linux"):
     def openPath(path):
-        os.system("xdg-open " + path)
+        Popen("xdg-open " + path, shell=True,stdin=None, stdout=None, stderr=None, close_fds=True)
     def clear():
         os.system("clear")
 elif(platform.system() == "Darwin"):
     def openPath(path):
-        os.system("open " + path)
+        Popen("open " + path, shell=True,stdin=None, stdout=None, stderr=None, close_fds=True)
     def clear():
         os.system("clear")
 
@@ -67,15 +72,23 @@ class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     pass
 
 def convert(url,resolution):
+    global last
+    def comp(a,b):
+        global last
+        print(b, last)
+        if(b == last):
+            return
+        last = b
+        Notification(title="Video downloaded", description=b, duration=5, urgency='low', icon_path=None).send()
     yt = pytube.YouTube(url)
-    stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
-    if(stream == None):
-        stream = yt.streams.get_highest_resolution()
     fileName = slugi.slugify(yt.title)
     if(os.path.exists("downloads/" + fileName)):
         return "File already exists!"
+    yt = pytube.YouTube(url,on_complete_callback=comp)
+    stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
+    if(stream == None):
+        stream = yt.streams.get_highest_resolution()
     stream.download("downloads",filename=fileName)
-    return "File downloaded!"
 
 if __name__ == '__main__':
     try:

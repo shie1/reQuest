@@ -76,7 +76,7 @@
         margin-top: 1vh;
         display: flex;
         justify-content: center;
-        width: 45vw;
+        width: 850px;
         font-size: 15px;
     }
 </style>
@@ -134,7 +134,7 @@
         if(!res){res=""}
         req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res))
         $.get(req)
-        return true
+        console.log("Downloaded!")
     }
     function opdl(){
         i++
