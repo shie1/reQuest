@@ -1,0 +1,11 @@
+<script>
+    if(document.location.href.indexOf('?') != -1){
+        page = document.location.href.split('?')[1]
+        if(page == ""){
+            page = "convert"
+        }
+    }else{
+        page = "convert"
+    }
+    document.location.href = document.location.href.split("?")[0] + page
+</script>

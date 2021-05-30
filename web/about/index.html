@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    body {
+        touch-action: none;
+    }
+    .overlay *{
+        padding: 0;
+        margin: 0;
+        user-select: none;
+    }
+    .overlay{
+        position: absolute;
+        z-index: 99 !important;
+        color: white;
+    }
+    h1{
+        font-size: 200px;
+    }
+    p{
+        font-size: 45px;
+    }
+    p.top{
+        margin-bottom: -70px;
+    }
+    li{
+        font-size: 20px;
+        transition: 100ms;
+    }
+    li:hover{
+        transform: rotate(5deg);
+    }
+    li:active{
+        transition: 50ms;
+        color: rgb(84, 200, 253);
+    }
+    a.topleft{
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 30px;
+    }
+    a {
+        color: white;
+        text-decoration: none;
+    }
+    a:hover{
+        transition: 100ms;
+        transform: rotate(5deg);
+    }
+    a:active{
+        transition: 50ms;
+        color: rgb(84, 200, 253);
+    }
+    p.by{
+        text-align: right;
+        margin-top: -40px;
+        font-size: 40px;
+    }
+    ul{
+        transform: translateY(10px);
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>re:Quest</title>
+    <script src="/js/jquery.js"></script>
+    <link rel="stylesheet" href="/css/night.css">
+</head>
+<body>
+    <div class="night">
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+        <div class="shooting_star"></div>
+    </div>
+    <div class="overlay">
+        <div class="welcome">
+            <p class="top">Welcome to</p>
+            <h1>re:Quest</h1>
+            <p class="by">by: Shie1bi</p>
+        </div>
+        <ul style="position: absolute;">
+            <li><a href="https://github.com/shie1/reQuest">GitHub</a></li>
+        </ul>
+    </div>
+    <a class="topleft" href="/">Back</a>
+</body>
+
+</html>
