@@ -1,16 +1,27 @@
-import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server
+import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform
 from threading import Thread
 from time import sleep
+from pyngrok import ngrok
 
 if(len(sys.argv) > 1):
     try:
         port = int(sys.argv[1])
     except:
-        port = 8080
+        port = 4658
 else:
-    port = 8080
+    port = 4658
 
 os.chdir('web')
+
+if(platform.system() == "Windows"):
+    def openPath(path):
+        os.system("explorer.exe " + path)
+elif(platform.system() == "Linux"):
+    def openPath(path):
+        os.system("xdg-open " + path)
+elif(platform.system() == "Darwin"):
+    def openPath(path):
+        os.system("open " + path)
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -32,6 +43,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return super().do_GET()
         if(req.find("/eval/") != -1):
             eval(params[0])
+            return super().do_GET()
+        if(req.find("/open-path/") != -1):
+            openPath(params[0])
             return super().do_GET()
         return super().do_GET()
 
@@ -67,5 +81,6 @@ def convert(url,resolution):
 
 if __name__ == '__main__':
     server = ThreadedHTTPServer(('localhost', port), Handler)
+    ngrok.connect(port)
     print('Starting server, use <Ctrl-C> to stop')
     server.serve_forever()

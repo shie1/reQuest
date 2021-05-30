@@ -2,13 +2,15 @@
 <html lang="en">
 
 <style>
+    *{
+        user-select: none;
+    }
     body {
         touch-action: none;
     }
     .overlay *{
         padding: 0;
         margin: 0;
-        user-select: none;
     }
     .overlay{
         margin-top: -2px;
@@ -31,7 +33,7 @@
         margin-bottom: -70px;
     }
     li{
-        font-size: 20px;
+        font-size: 50px;
         transition: 100ms;
     }
     li:hover{
@@ -41,8 +43,10 @@
         transition: 50ms;
         color: rgb(84, 200, 253);
     }
-    a.topleft{
+    .topleft{
         position: fixed;
+        display: flex;
+        flex-direction: column;
         top: 10px;
         left: 10px;
         font-size: 30px;
@@ -50,10 +54,11 @@
     a {
         color: white;
         text-decoration: none;
+        cursor: pointer;
     }
     a:hover{
         transition: 100ms;
-        transform: rotate(5deg);
+        transform: rotate(2deg);
     }
     a:active{
         transition: 50ms;
@@ -117,7 +122,10 @@
             <input autocomplete="off" type="text" id="conv">
         </form>
     </div>
-    <a class="topleft" href="/about">About</a>
+    <div class="topleft">
+        <a href="/about">About</a>
+        <a onclick="$.get('/open-path/?downloads')">Downloads</a>
+    </div>
 </body>
 
 <script>

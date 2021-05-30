@@ -2,15 +2,18 @@
 <html lang="en">
 
 <style>
+    *{
+        user-select: none;
+    }
     body {
         touch-action: none;
     }
     .overlay *{
         padding: 0;
         margin: 0;
-        user-select: none;
     }
     .overlay{
+        margin-top: -2px;
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -30,7 +33,7 @@
         margin-bottom: -70px;
     }
     li{
-        font-size: 40px;
+        font-size: 50px;
         transition: 100ms;
     }
     li:hover{
@@ -40,8 +43,10 @@
         transition: 50ms;
         color: rgb(84, 200, 253);
     }
-    a.topleft{
+    .topleft{
         position: fixed;
+        display: flex;
+        flex-direction: column;
         top: 10px;
         left: 10px;
         font-size: 30px;
@@ -49,10 +54,11 @@
     a {
         color: white;
         text-decoration: none;
+        cursor: pointer;
     }
     a:hover{
         transition: 100ms;
-        transform: rotate(5deg);
+        transform: rotate(2deg);
     }
     a:active{
         transition: 50ms;
@@ -62,6 +68,13 @@
         text-align: right;
         margin-top: -40px;
         font-size: 40px;
+    }
+    input[type=text]{
+        margin-top: 1vh;
+        display: flex;
+        justify-content: center;
+        width: 45vw;
+        font-size: 15px;
     }
     ul{
         transform: translateY(10px);
