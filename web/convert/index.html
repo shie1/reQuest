@@ -89,7 +89,7 @@
         margin-top: 1vh;
         display: flex;
         justify-content: center;
-        width: 45vw;
+        width: 850px;
     }
     ul{
         transform: translateY(10px);
@@ -183,7 +183,7 @@
     </div>
     <div class="topleft">
         <a href="/about">About</a>
-        <a onclick="opdl()">Downloads</a>
+        <a href="/open-path?downloads%2F" onclick="opdl()">Downloads</a>
     </div>
 </body>
 
@@ -194,6 +194,7 @@
         $.get(req)
     }
     function opdl(){
+        if(event){event.preventDefault()}
         document.location.href = '/open-path/?downloads%2F&' + Date.now().toString()
     }
 </script>

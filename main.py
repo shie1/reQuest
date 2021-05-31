@@ -7,6 +7,8 @@ from PIL import Image
 from subprocess import Popen
 from pynotifier import Notification
 
+sys.tracebacklimit = 0
+
 last = ""
 
 iconfile = Image.open("icon.png")
