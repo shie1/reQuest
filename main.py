@@ -13,19 +13,29 @@ last = ""
 
 iconfile = Image.open("icon.png")
 
-opts, args = getopt.getopt(sys.argv[1:],"p:",["port=","no-init"])
+opts, args = getopt.getopt(sys.argv[1:],"p:",["port="])
 
-no_init = False
 port = 4658
 
 for opt, arg in opts:
     if opt in ('-p',"--port"):
         port = int(arg)
-    elif opt in ("--no-init"):
-        no_init = True
 
-if no_init == False:
-    slugi.init(cn(port))
+def slugify(value, allow_unicode=False):
+    """
+    Taken from https://github.com/django/django/blob/master/django/utils/text.py
+    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+    dashes to single dashes. Remove characters that aren't alphanumerics,
+    underscores, or hyphens. Convert to lowercase. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+    """
+    value = str(value)
+    if allow_unicode:
+        value = unicodedata.normalize('NFKC', value)
+    else:
+        value = unicodedata.normalize('NFKD', value).encode('ascii', 'ignore').decode('ascii')
+    value = re.sub(r'[^\w\s-]', '', value.lower())
+    return re.sub(r'[-\s]+', '-', value).strip('-_')
 
 os.chdir('web')
 
@@ -81,8 +91,11 @@ def convert(url,resolution):
             return
         last = b
         Notification(title="Video downloaded", description=b, duration=5, urgency='low', icon_path=None).send()
-    yt = pytube.YouTube(url)
-    fileName = slugi.slugify(yt.title)
+    try:
+        yt = pytube.YouTube(url)
+    except:
+        return
+    fileName = slugify(yt.title)
     if(os.path.exists("downloads/" + fileName)):
         return "File already exists!"
     yt = pytube.YouTube(url,on_complete_callback=comp)
