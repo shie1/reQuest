@@ -72,9 +72,6 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             url, res = params[0], params[1]
             convert(url,res)
             return super().do_GET()
-        if(req.find("/eval/") != -1):
-            eval(params[0])
-            return super().do_GET()
         if(req.find("/open-path/") != -1):
             openPath(params[0])
             return super().do_GET()
