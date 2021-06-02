@@ -1,4 +1,4 @@
-import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform, slugi, pystray, getopt
+import os, webbrowser, sys, socketserver, socket, pytube, unicodedata, re, urllib, http.server, platform, pystray, getopt
 from pytube.cli import on_progress
 from threading import Thread
 from time import sleep
