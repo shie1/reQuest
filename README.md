@@ -1,5 +1,5 @@
 # re:Quest - YouTube converter
-**[sRQST]([https://link](https://github.com/shie1/sRQST)) rewritten** with **less js** and **more python**!
+**[sRQST]([https://link](https://github.com/shie1/sRQST)) rewritten** with **less js** and **more python**.
 
 ![screenshot](https://i.imgur.com/RkH5Fit.png)
 
