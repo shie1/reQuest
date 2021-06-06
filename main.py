@@ -74,8 +74,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         for item in nparams:
             params.append(urllib.parse.unquote(item))
         if(req.find("/convert/get") != -1):
-            url, res = params[0], params[1]
-            convert(url,res)
+            url, res, type = params[0], params[1], params[2]
+            convert(url,res, type)
             return super().do_GET()
         if(req.find("/open-path/") != -1):
             openPath(os.path.join(cwd, params[0]))
@@ -85,28 +85,35 @@ class Handler(http.server.SimpleHTTPRequestHandler):
 class ThreadedHTTPServer(socketserver.ThreadingMixIn, http.server.HTTPServer):
     pass
 
-def convert(url,resolution):
+def convert(url,resolution,type):
     global last
     def comp(a,b):
         global last
         if(b == last):
             return
         last = b
+        if(type == "audio"):
+            b = b.replace('.mp4', '.mp3')
         Notification(title="Video downloaded", description=b, duration=5, urgency='low', icon_path=os.path.join(cwd, "icon.png")).send()
     try:
         yt = pytube.YouTube(url)
     except:
         return
     fileName = slugify(yt.title)
-    if(os.path.exists("downloads/" + fileName)):
+    if(os.path.exists(os.path.join("downloads", fileName))):
         return "File already exists!"
     yt = pytube.YouTube(url,on_complete_callback=comp)
     stream = ""
-    if(resolution != ""):
-        stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
-    if(stream == None) or (resolution == ""):
-        stream = yt.streams.get_highest_resolution()
+    if(type == "video"):
+        if(resolution != ""):
+            stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
+        if(stream == None) or (resolution == ""):
+            stream = yt.streams.get_highest_resolution()
+    elif(type == "audio"):
+        stream = yt.streams.filter(only_audio=True).all()[0]
     stream.download(os.path.join(cwd, "downloads"),filename=fileName)
+    if(type == "audio"):
+        os.rename(os.path.join(cwd, "downloads", fileName + '.mp4'), os.path.join(cwd, "downloads", fileName + '.mp3'))
 
 if __name__ == '__main__':
     try:

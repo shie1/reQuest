@@ -66,6 +66,14 @@
         left: 10px;
         font-size: 30px;
     }
+    .topright{
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        top: 10px;
+        right: 10px;
+        font-size: 30px;
+    }
     a {
         color: white;
         text-decoration: none;
@@ -136,6 +144,24 @@
         animation-fill-mode: both;
         animation: wiggle 20s infinite;
     }
+    .fa-w-18{
+        padding: auto;
+        margin: auto;
+        font-size: 40px;
+    }
+    #fSwitch * {
+        transition: 100ms;
+    }
+    #fSwitch:hover * {
+        transform: rotate(2deg);
+        filter: brightness(1.25);
+    }
+    #fSwitch[aria-checked="false"] * {
+        color: #ef3838;
+    }
+    #fSwitch[aria-checked="true"] * {
+        color: #38ef7d;
+    }
 </style>
     
 <head>
@@ -145,6 +171,7 @@
     <title>re:Quest</title>
     <script src="/js/jquery.js"></script>
     <link rel="stylesheet" href="/css/night.css">
+    <script src="/js/font-awesome.min.js"></script>
 </head>
 <body>
     <div class="night">
@@ -176,7 +203,7 @@
             <p class="by">by: Shie1bi</p>
         </div>
         <div class="form__group field" style="display: flex;justify-content: center;margin-top: -20px;">
-            <form onsubmit="convert($('input#conv').val());$('input#conv').val('');return false">
+            <form onsubmit="convert($('input#conv').val(),'',$('#fSwitch').attr('aria-checked'));$('input#conv').val('');return false">
                 <input autocomplete="off" type="text" class="form__field" placeholder="Video" name="video" id="conv" required>
             </form>
         </div>
@@ -185,17 +212,34 @@
         <a href="/about">About</a>
         <a href="/open-path?downloads" onclick="opdl()">Downloads</a>
     </div>
+    <div class="topright">
+        <div id="fSwitch" aria-checked="false" onclick="toggleAttr('#fSwitch', 'aria-checked')">
+            <i class="fas fa-video"></i>
+        </div>
+    </div>
 </body>
 
 <script>
-    function convert(url,res){
-        if(!res){res=""}
-        req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res) + "&" + Date.now().toString())
+    function convert(url,res,type){
+        if(!res){res="1080p"}
+        if(type == "false"){type = "video"}else{type = "audio"}
+        req = (document.location.origin + "/convert/get?" + encodeURIComponent(url) + "&" + encodeURIComponent(res) + "&" + encodeURIComponent(type) + "&" + Date.now().toString())
         $.get(req)
     }
     function opdl(){
         if(event){event.preventDefault()}
         document.location.href = '/open-path/?downloads&' + Date.now().toString()
+    }
+    function toggleAttr(elem, attr){
+        attri = $(elem).attr(attr)
+        if(attri == "true"){attri = false}else{attri = true}
+        $(elem).attr(attr, attri)
+        state = $('#fSwitch').attr('aria-checked')
+        if(state == "false"){
+            $('#fSwitch svg').attr('data-icon', 'video')
+        }else{
+            $('#fSwitch svg').attr('data-icon', 'volume-up')
+        }
     }
 </script>
 
