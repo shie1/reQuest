@@ -46,7 +46,7 @@ os.chdir('web')
 
 if(platform.system() == "Windows"):
     def openPath(path):
-        Popen("explorer.exe " + path, shell=True,stdin=None, stdout=None, stderr=None, close_fds=True)
+        Popen('explorer.exe "' + path, shell=True,stdin=None, stdout=None, stderr=None, close_fds=True + '"')
     def clear():
         os.system("cls")
 elif(platform.system() == "Linux"):
