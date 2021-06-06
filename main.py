@@ -96,9 +96,9 @@ def convert(url,resolution):
     if(os.path.exists("downloads/" + fileName)):
         return "File already exists!"
     yt = pytube.YouTube(url,on_complete_callback=comp)
-    stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
-    if(stream == None):
-        stream = yt.streams.get_highest_resolution()
+    #stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
+    #if(stream == None):
+    stream = yt.streams.get_highest_resolution()
     stream.download("downloads",filename=fileName)
 
 if __name__ == '__main__':
