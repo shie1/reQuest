@@ -39,6 +39,9 @@ def slugify(value, allow_unicode=False):
     value = re.sub(r'[^\w\s-]', '', value.lower())
     return re.sub(r'[-\s]+', '-', value).strip('-_')
 
+if(os.path.exists("downloads") == False):
+    os.mkdir("downloads")
+
 os.chdir('web')
 
 if(platform.system() == "Windows"):
@@ -75,7 +78,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             convert(url,res)
             return super().do_GET()
         if(req.find("/open-path/") != -1):
-            openPath(params[0])
+            openPath(os.path.join(cwd, params[0]))
             return super().do_GET()
         return super().do_GET()
 
@@ -102,7 +105,7 @@ def convert(url,resolution):
         stream = yt.streams.get_by_resolution(resolution) # example: 720p, 480p
     if(stream == None) or (resolution == ""):
         stream = yt.streams.get_highest_resolution()
-    stream.download("downloads",filename=fileName)
+    stream.download(os.path.join(cwd, "downloads"),filename=fileName)
 
 if __name__ == '__main__':
     try:

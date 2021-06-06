@@ -13,8 +13,9 @@ re:Quest is a web server that runs in the background, you can control it from th
 # Running from source
 1. Have python and pip installed
 2. Clone the repository: `git clone https://github.com/shie1/reQuest.git`
-3. Install the requirements: `pip install -r requirements.txt`
-4. Start the server: `python main.py` or `python3 main.py`
+3. Enter the directory: `cd reQuest`
+4. Install the requirements: `pip install -r requirements.txt`
+5. Start the server: `python main.py` or `python3 main.py`
 # Launch arguments
 - Specify a custom port: `re-quest -p <PORT>`
 
