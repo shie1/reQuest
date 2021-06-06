@@ -7,6 +7,8 @@ from PIL import Image
 from subprocess import Popen
 from pynotifier import Notification
 
+cwd = os.getcwd()
+
 sys.tracebacklimit = 0
 
 last = ""
@@ -87,7 +89,7 @@ def convert(url,resolution):
         if(b == last):
             return
         last = b
-        Notification(title="Video downloaded", description=b, duration=5, urgency='low', icon_path=None).send()
+        Notification(title="Video downloaded", description=b, duration=5, urgency='low', icon_path=os.path.join(cwd, "icon.png")).send()
     try:
         yt = pytube.YouTube(url)
     except:
