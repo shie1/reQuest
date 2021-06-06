@@ -1,6 +1,6 @@
 temp/
 env/
 __pycache__
-web/downloads
+web/downloads/
 .vscode/
 downloads/
