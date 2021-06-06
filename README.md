@@ -18,5 +18,8 @@ re:Quest is a web server that runs in the background, you can control it from th
 5. Start the server: `python main.py` or `python3 main.py`
 # Launch arguments
 - Specify a custom port: `re-quest -p <PORT>`
+# Additional credits
+- CSS background: [Yusuka Nakaya](https://codepen.io/YusukeNakaya)
+- Windows tester: [Tchabyka](https://twitter.com/tchabyka_)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A74VIIL)
