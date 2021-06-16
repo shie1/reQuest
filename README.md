@@ -5,7 +5,7 @@
 
 # Known issues
 - The program can't download in a resolution that's higher than 720p (will be fixed)
-- The program (currently) was only tested on Linux, but everything should work.
+- I am developing on Linux, **if you build from source** certain features may not work on Windows, they take longer to be implemented (releases work)
 
 # Description
 re:Quest is a web server that runs in the background, you can control it from the browser. (The default access url is [localhost:4658](http://localhost:4658))
